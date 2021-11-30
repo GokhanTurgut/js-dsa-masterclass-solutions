@@ -5,10 +5,18 @@ function validAnagram(str1, str2) {
   const str2Chars = {};
 
   for (let char of str1) {
-    str1Chars[char] = str1Chars[char]++ || 1;
+    if (str1Chars[char]) {
+      str1Chars[char]++;
+    } else {
+      str1Chars[char] = 1;
+    }
   }
   for (let char of str2) {
-    str2Chars[char] = str2Chars[char]++ || 1;
+    if (str2Chars[char]) {
+      str2Chars[char]++;
+    } else {
+      str2Chars[char] = 1;
+    }
   }
 
   for (let char in str1Chars) {
@@ -19,4 +27,8 @@ function validAnagram(str1, str2) {
   return true;
 }
 
-console.log(validAnagram("anagrams", "nagaramm"));
+console.log(validAnagram("anagram", "nagaram")); // True
+console.log(validAnagram("aaz", "zza")); // False
+console.log(validAnagram("rat", "car")); // False
+console.log(validAnagram("awesome", "awesom")); // False
+console.log(validAnagram("amanaplanacanalpanama", "acanalmanplanpamana")); // False
