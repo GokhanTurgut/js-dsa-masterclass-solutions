@@ -7,34 +7,35 @@ class Node {
 
 class Stack {
   constructor() {
-    this.first = null;
-    this.last = null;
+    this.head = null;
+    this.tail = null;
     this.size = 0;
   }
 
   push(value) {
     const node = new Node(value);
-    if (!this.last) {
-      this.first = node;
-      this.last = node;
+    if (!this.tail) {
+      this.head = node;
+      this.tail = node;
     } else {
-      node.next = this.first;
-      this.first = node;
+      node.next = this.head;
+      this.head = node;
     }
-    this.size++;
-    return this.size;
+    return ++this.size;
   }
 
   pop() {
-    if (!this.first) return null;
-    const popNode = this.first;
+    if (!this.head) return undefined;
+    const popNode = this.head;
     if (this.size === 1) {
-      this.first = null;
-      this.last = null;
+      this.head = null;
+      this.tail = null;
     } else {
-      this.first = popNode.next;
+      this.head = popNode.next;
+      popNode.next = null;
     }
-    return popNode;
+    this.size--;
+    return popNode.value;
   }
 }
 
@@ -45,7 +46,6 @@ console.log(stack.push("second"));
 console.log(stack.push("third"));
 console.log(stack.push("forth"));
 console.log(stack.push("fifth"));
-console.log(stack.pop());
 console.log(stack.pop());
 console.log(stack.pop());
 console.log(stack.pop());
